@@ -63,14 +63,14 @@
 	if([indexPath row] == 0) {
 		morningDate = [datePicker date];
 		[morningDate retain];
-		NSLog(@"Changing morning date");
-		NSLog(@"%@",[morningDate description]);
+		ImprovedLog(@"Changing morning date");
+		ImprovedLog(@"%@",[morningDate description]);
 	}
 	if([indexPath row] == 1) {
 		eveningDate = [datePicker date];
 		[eveningDate retain];
-		NSLog(@"Changing evening date");
-		NSLog(@"%@",[eveningDate description]);
+		ImprovedLog(@"Changing evening date");
+		ImprovedLog(@"%@",[eveningDate description]);
 	}
 	
 		// remove the "Done" button in the nav bar
@@ -99,7 +99,7 @@
 	//Number of rows it should expect should be based on the section
 	NSDictionary *dictionary = [listOfItems objectAtIndex:section];
 	NSArray *array = [dictionary objectForKey:@"setup"];
-	NSLog(@"%d", [array count]);
+	ImprovedLog(@"%d", [array count]);
 	return [array count];
 }
 
@@ -249,11 +249,11 @@
 	[listOfItems addObject:aboutDict];
 	[listOfItems addObject:cameraDict];
 	
-	NSLog(@"%d", [listOfItems count]);
+	ImprovedLog(@"%d", [listOfItems count]);
 	
-	NSLog(@"%@", [about description]);
+	ImprovedLog(@"%@", [about description]);
 	
-	NSLog(@"%@", [[alarmTimes morningDate] description]);
+	ImprovedLog(@"%@", [[alarmTimes morningDate] description]);
 	[datePicker setDate:morningDate];
 
 }

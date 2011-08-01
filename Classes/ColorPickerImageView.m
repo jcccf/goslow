@@ -18,7 +18,7 @@
 
 
 - (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-	NSLog(@"A Touch Ended.");
+	ImprovedLog(@"A Touch Ended.");
 	if (self.hidden==YES) {
 		//color wheel is hidden, so don't handle  this as a color wheel event.
 		[[self nextResponder] touchesEnded:touches withEvent:event];
@@ -28,14 +28,14 @@
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:self]; //where image was tapped
 	self.lastColor = [self getPixelColorAtLocation:point]; 
-	NSLog(@"color %@",lastColor);
+	ImprovedLog(@"color %@",lastColor);
 	[pickedColorDelegate pickedColor:(UIColor*)self.lastColor];
 }
 
 
 //Remove the next two methods if you only want the color to change when you let go of the iPhone.
 - (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
-	NSLog(@"A Touch Ended.");
+	ImprovedLog(@"A Touch Ended.");
 	if (self.hidden==YES) {
 		//color wheel is hidden, so don't handle  this as a color wheel event.
 		[[self nextResponder] touchesEnded:touches withEvent:event];
@@ -45,12 +45,12 @@
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:self]; //where image was tapped
 	self.lastColor = [self getPixelColorAtLocation:point]; 
-	NSLog(@"color %@",lastColor);
+	ImprovedLog(@"color %@",lastColor);
 	[pickedColorDelegate pickedColor:(UIColor*)self.lastColor];
 }
 
 - (void) touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-	NSLog(@"A Touch Ended.");
+	ImprovedLog(@"A Touch Ended.");
 	if (self.hidden==YES) {
 		//color wheel is hidden, so don't handle  this as a color wheel event.
 		[[self nextResponder] touchesEnded:touches withEvent:event];
@@ -60,7 +60,7 @@
 	UITouch* touch = [touches anyObject];
 	CGPoint point = [touch locationInView:self]; //where image was tapped
 	self.lastColor = [self getPixelColorAtLocation:point]; 
-	NSLog(@"color %@",lastColor);
+	ImprovedLog(@"color %@",lastColor);
 	[pickedColorDelegate pickedColor:(UIColor*)self.lastColor];
 }
 
@@ -91,7 +91,7 @@
 		int red = data[offset+1]; 
 		int green = data[offset+2]; 
 		int blue = data[offset+3]; 
-		NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
+		ImprovedLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
 		color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
 	}
 	

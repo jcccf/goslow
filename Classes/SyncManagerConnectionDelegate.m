@@ -7,6 +7,7 @@
 //
 
 #import "SyncManagerConnectionDelegate.h"
+#import "MLog.h"
 
 
 @implementation SyncManagerConnectionDelegate
@@ -27,13 +28,13 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"%@ Received response...", syncType);
+    ImprovedLog(@"%@ Received response...", syncType);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSString *outstring = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-	NSLog(@"%@", [NSString stringWithFormat: @"%@ success: %@", syncType, outstring]);
+	ImprovedLog(@"%@", [NSString stringWithFormat: @"%@ success: %@", syncType, outstring]);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -41,38 +42,38 @@
 {
     // release the connection, and the data object
 	
-	NSLog(@"A connection error happened!");
+	ImprovedLog(@"A connection error happened!");
 	
 	assert(urlRequest != nil);
 	
 	// Add to the pending urlRequest list
-	NSLog(@"Trying to lock");
+	ImprovedLog(@"Trying to lock");
 	[lock lock];
-	NSLog(@"Trying to lock2");
+	ImprovedLog(@"Trying to lock2");
 	NSMutableArray* ar = [[NSMutableArray alloc] init];
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	NSData *objectsData = [userDefaults objectForKey:@"savedUrlRequests"];
 	NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData];
-	NSLog(@"Trying to lock3");
+	ImprovedLog(@"Trying to lock3");
 	if(objects != nil){
 		[ar removeObjectsInArray:objects];
 		[ar addObjectsFromArray:objects];
 	}
-	NSLog(@"Trying to lock4");
+	ImprovedLog(@"Trying to lock4");
 	[ar addObject:urlRequest];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedUrlRequests"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-	NSLog(@"Trying to lock5");
+	ImprovedLog(@"Trying to lock5");
 	[lock unlock];
-	NSLog(@"%@ failed and was saved to the pending urlRequest list", syncType);
-    NSLog(@"%@ failed with error - %@", syncType, [error localizedDescription]);
+	ImprovedLog(@"%@ failed and was saved to the pending urlRequest list", syncType);
+    ImprovedLog(@"%@ failed with error - %@", syncType, [error localizedDescription]);
 	
 	[connection release];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"%@ upload succeeded!", syncType);
+    ImprovedLog(@"%@ upload succeeded!", syncType);
     [connection release];
 }
 

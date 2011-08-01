@@ -72,10 +72,10 @@
 	NetworkStatus netStatus = [wifiReach currentReachabilityStatus];
 	
 	if(netStatus == ReachableViaWiFi){
-		NSLog(@"Wifi connection is turned on!!");
+		ImprovedLog(@"Wifi connection is turned on!!");
 	}
 	else {
-		NSLog(@"NO WIFI CONNECTION!!");
+		ImprovedLog(@"NO WIFI CONNECTION!!");
 	}
 
 	
@@ -95,7 +95,7 @@
 		}
 		isNotFirstRun = YES;
 		//[[UIApplication sharedApplication] cancelLocalNotification:localNotif];
-        NSLog(@"Recieved Notification %@",localNotif);
+        ImprovedLog(@"Recieved Notification %@",localNotif);
     }
 	
 	
@@ -103,10 +103,10 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[self setTimeMorning:(NSInteger *)[defaults integerForKey:@"time_morning"]];
 	[self setTimeEvening:(NSInteger *)[defaults integerForKey:@"time_evening"]];
-	NSLog(@"Time of Morning Suggestion is %@", timeMorning);
-	NSLog(@"Time of Evening Suggestion is %@", timeEvening);
+	ImprovedLog(@"Time of Morning Suggestion is %@", timeMorning);
+	ImprovedLog(@"Time of Evening Suggestion is %@", timeEvening);
 	if( [defaults objectForKey:@"is_not_first_run"] == NO){
-		NSLog(@"First Time Executing");
+		ImprovedLog(@"First Time Executing");
 		[defaults setBool:YES forKey:@"is_not_first_run"];
 		[defaults synchronize];
 		//[self setIsNotFirstRun:NO];
@@ -177,7 +177,7 @@
 	//tabController.selectedIndex = 0;
 	//app.applicationIconBadgeNumber = 0;
 	//[[UIApplication sharedApplication] cancelLocalNotification:notif];
-    NSLog(@"Recieved Notification %@",notif);
+    ImprovedLog(@"Recieved Notification %@",notif);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -231,7 +231,7 @@
              
              abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
              */
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            ImprovedLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 
     }
@@ -314,7 +314,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        ImprovedLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     

@@ -221,7 +221,7 @@
 	else {
 		hackTime = CFAbsoluteTimeGetCurrent();
 		
-		NSLog(@"Did Finish Picking!");
+		ImprovedLog(@"Did Finish Picking!");
 		
 		// Access the uncropped image from info dictionary
 		UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
@@ -243,9 +243,9 @@
 		BOOL f = [imageData writeToFile:fullPath atomically:YES];
 		
 		if(!f)
-			NSLog(@"Image save fail");
+			ImprovedLog(@"Image save fail");
 		else {
-			NSLog(@"Image saved!");
+			ImprovedLog(@"Image saved!");
 		}
 		
 		[[CoreDataManager getCoreDataManagerInstance] addLog:[NSNumber numberWithInt:10]];

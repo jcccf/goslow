@@ -11,6 +11,7 @@
 #import "Reachability.h"
 #import "LogScreen.h"
 #import "ColorReflection.h"
+#import "MLog.h"
 
 // Posting constants
 #define NOTIFY_AND_LEAVE(X) {[self cleanup:X]; return;}
@@ -81,7 +82,7 @@ static SyncManager *sharedInstance = nil;
 }
 
 -(void) sendTextReflection:(NSString *)text{
-	NSLog(@"Buffering Text Reflection");
+	ImprovedLog(@"Buffering Text Reflection");
 	assert(text != nil);
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     [post_dict setObject:text forKey:@"text_reflection[text]"];
@@ -101,13 +102,13 @@ static SyncManager *sharedInstance = nil;
     [urlRequest setHTTPBody:postData];
 	
 	// Submit & retrieve results
-	NSLog(@"Contacting Rails....");
+	ImprovedLog(@"Contacting Rails....");
 	[urlRequest retain];
 	[[NSURLConnection alloc] initWithRequest:urlRequest delegate:[[SyncManagerConnectionDelegate alloc] set:urlRequest withLock:[self urLock] withType:@"TextReflection"]];
 }
 
 -(void) sendPhotoReflection:(UIImage *)image{
-	NSLog(@"Buffering Photo Reflection");
+	ImprovedLog(@"Buffering Photo Reflection");
 	assert(image != nil);
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
 	[post_dict setObject:UIImageJPEGRepresentation(image, 0.75f) forKey:@"photo_reflection[uploaded_picture]"];
@@ -126,13 +127,13 @@ static SyncManager *sharedInstance = nil;
     [urlRequest setHTTPBody:postData];
 	
 	// Submit & retrieve results
-	NSLog(@"Contacting Rails....");
+	ImprovedLog(@"Contacting Rails....");
 	[urlRequest retain];
 	[[NSURLConnection alloc] initWithRequest:urlRequest delegate:[[SyncManagerConnectionDelegate alloc] set:urlRequest withLock:[self urLock] withType:@"PhotoReflection"]];
 }
 
 -(void) sendColorReflectionWithRed:(NSNumber*)r andGreen:(NSNumber*)g andBlue:(NSNumber*)b{
-	NSLog(@"Buffering Color Reflection");
+	ImprovedLog(@"Buffering Color Reflection");
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     [post_dict setObject:[r stringValue] forKey:@"color_reflection[red]"];
 	[post_dict setObject:[g stringValue] forKey:@"color_reflection[green]"];
@@ -152,14 +153,14 @@ static SyncManager *sharedInstance = nil;
     [urlRequest setHTTPBody:postData];
 	
 	// Submit & retrieve results
-	NSLog(@"Contacting Rails....");
+	ImprovedLog(@"Contacting Rails....");
 	[urlRequest retain];
 	[[NSURLConnection alloc] initWithRequest:urlRequest delegate:[[SyncManagerConnectionDelegate alloc] set:urlRequest withLock:[self urLock] withType:@"ColorReflection"]];
 }
 
 -(void) sendDailySuggestion:(NSString*)theme andTime:(NSString *)timestamp{
 	//assert([timestamp length] == 19); //Timestamps must be in yyyy-mm-dd hh:mm:ss format
-	NSLog(@"Buffering Daily Suggestion");
+	ImprovedLog(@"Buffering Daily Suggestion");
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     [post_dict setObject:theme forKey:@"daily_suggestion[theme]"];
 	[post_dict setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"daily_suggestion[udid]"];
@@ -178,14 +179,14 @@ static SyncManager *sharedInstance = nil;
     [urlRequest setHTTPBody:postData];
 	
 	// Submit & retrieve results
-	NSLog(@"Contacting Rails....");
+	ImprovedLog(@"Contacting Rails....");
 	[urlRequest retain];
 	[[NSURLConnection alloc] initWithRequest:urlRequest delegate:[[SyncManagerConnectionDelegate alloc] set:urlRequest withLock:[self urLock] withType:@"DailySuggestion"]];
 }
 
 -(void) sendLogScreen:(int)screen_id andTime:(NSString *)timestamp{
 	//assert([timestamp length] == 19); //Timestamps must be in yyyy-mm-dd hh:mm:ss format
-	NSLog(@"Sending Log Screen");
+	ImprovedLog(@"Sending Log Screen");
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     [post_dict setObject:[NSString stringWithFormat: @"%d", screen_id] forKey:@"log_screen[screen_id]"];
 	[post_dict setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"log_screen[udid]"];
@@ -204,7 +205,7 @@ static SyncManager *sharedInstance = nil;
     [urlRequest setHTTPBody:postData];
 	
 	// Submit & retrieve results
-	NSLog(@"Contacting Rails....");
+	ImprovedLog(@"Contacting Rails....");
 	[urlRequest retain];
 	[[NSURLConnection alloc] initWithRequest:urlRequest delegate:[[SyncManagerConnectionDelegate alloc] set:urlRequest withLock:[self urLock] withType:@"LogScreen"]];
 }
@@ -226,7 +227,7 @@ static SyncManager *sharedInstance = nil;
 //		[ar removeObjectsInArray:objects];
 //		[ar addObjectsFromArray:objects];
 //	}
-//	NSLog(@"Loaded Buffered Data");
+//	ImprovedLog(@"Loaded Buffered Data");
 //	
 //	// TODO Ensure that buffered stuff is preserved even when you exit the application
 //	
@@ -235,10 +236,10 @@ static SyncManager *sharedInstance = nil;
 //	NSMutableArray *objectsToDelete = [[NSMutableArray alloc] init];
 //	
 //	if(netStatus == ReachableViaWiFi){
-//		NSLog(@"Wifi connection is turned on!!");
+//		ImprovedLog(@"Wifi connection is turned on!!");
 //		
 //		// Sync any failed URLRequests
-//		NSLog(@"Trying to sync any failed URLRequests...");
+//		ImprovedLog(@"Trying to sync any failed URLRequests...");
 //		[[self urLock] lock];
 //		NSMutableArray* aru = [[NSMutableArray alloc] init];
 //		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -255,13 +256,13 @@ static SyncManager *sharedInstance = nil;
 //		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]] forKey:@"savedUrlRequests"];
 //		[[NSUserDefaults standardUserDefaults] synchronize];
 //		[[self urLock] unlock];
-//		NSLog(@"...finished initiating retries for failed URLRequests");
+//		ImprovedLog(@"...finished initiating retries for failed URLRequests");
 //		
 //		// Sync other normal stuff
-//		NSLog(@"Syncing Data");
+//		ImprovedLog(@"Syncing Data");
 //		for(NSObject* o in ar){
-//			NSLog(@"Syncing object...");
-//			NSLog([NSString stringWithFormat:@"Size of buffer array sending objects to server %i",[ar count]]);
+//			ImprovedLog(@"Syncing object...");
+//			ImprovedLog([NSString stringWithFormat:@"Size of buffer array sending objects to server %i",[ar count]]);
 //			if([o isKindOfClass:[NSString class]]){
 //				NSString *s = (NSString*)o;
 //				[self sendTextReflection:s];
@@ -272,7 +273,7 @@ static SyncManager *sharedInstance = nil;
 //				NSNumber* r = [cr colorRed];
 //				NSNumber* g = [cr colorGreen];
 //				NSNumber* b = [cr colorBlue];
-//				NSLog(@"%f %f %f", [r floatValue], [g floatValue], [b floatValue]);
+//				ImprovedLog(@"%f %f %f", [r floatValue], [g floatValue], [b floatValue]);
 //				[self sendColorReflectionWithRed:r andGreen:g andBlue:b];
 //				[objectsToDelete addObject:o];
 //			}
@@ -282,7 +283,7 @@ static SyncManager *sharedInstance = nil;
 //				NSString* suggestionTheme = (NSString*) [d objectAtIndex:0];
 //				NSDate* time = [d objectAtIndex:1];
 //				NSString* s = [time descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S %z" timeZone:nil locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-//				NSLog(@"%@", suggestionTheme);
+//				ImprovedLog(@"%@", suggestionTheme);
 //				[self sendDailySuggestion:suggestionTheme andTime:s];
 //				[objectsToDelete addObject:o];
 //			}
@@ -306,38 +307,38 @@ static SyncManager *sharedInstance = nil;
 //		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
 //		[[NSUserDefaults standardUserDefaults] synchronize];
 //		[[self urLock] unlock];
-//		NSLog(@"Saved Buffered Data");
+//		ImprovedLog(@"Saved Buffered Data");
 //	}
 //	else {
-//		NSLog(@"NO WIFI CONNECTION!!");
+//		ImprovedLog(@"NO WIFI CONNECTION!!");
 //	}
 //	
-//	NSLog(@"out of wifi if-then");
+//	ImprovedLog(@"out of wifi if-then");
 //	// Save to NSUserDefaults
 //	[[self urLock] lock];
 //	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
 //	[[NSUserDefaults standardUserDefaults] synchronize];
 //	[[self urLock] unlock];
-//	NSLog(@"Saved Buffered Data");
+//	ImprovedLog(@"Saved Buffered Data");
 	
 }
 
 - (void) cleanup: (NSString *) output
 {
-	NSLog(@"Error occured - %@", output);
+	ImprovedLog(@"Error occured - %@", output);
 }
 
 #pragma mark URLConnection Delegate Methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"Received response...");
+    ImprovedLog(@"Received response...");
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSString *outstring = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-	NSLog(@"%@", [NSString stringWithFormat: @"Success: %@", outstring]);
+	ImprovedLog(@"%@", [NSString stringWithFormat: @"Success: %@", outstring]);
 }
 
 - (void)connection:(NSURLConnection *)connection
@@ -351,12 +352,12 @@ static SyncManager *sharedInstance = nil;
     //[alert show];
     //[alert release];
 	
-    NSLog(@"Connection failed! Error - %@",[error localizedDescription]);
+    ImprovedLog(@"Connection failed! Error - %@",[error localizedDescription]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"Upload succeeded!");
+    ImprovedLog(@"Upload succeeded!");
     [connection release];
 }
 @end

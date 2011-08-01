@@ -49,10 +49,10 @@ static CoreDataManager *sharedInstance = nil;
 	
 	[self saveChanges];	
 	
-	NSLog(@"Red: %@", [newReflection colorRed]);
-	NSLog(@"Green: %@", [newReflection colorGreen]);
-	NSLog(@"Blue: %@", [newReflection colorBlue]);
-	NSLog(@"Created At: %@", [newReflection createdAt]);
+	ImprovedLog(@"Red: %@", [newReflection colorRed]);
+	ImprovedLog(@"Green: %@", [newReflection colorGreen]);
+	ImprovedLog(@"Blue: %@", [newReflection colorBlue]);
+	ImprovedLog(@"Created At: %@", [newReflection createdAt]);
 	
 	[[[SyncManager getSyncManagerInstance] bufferedReflections] addObject:newReflection];
 	[[SyncManager getSyncManagerInstance] syncData];
@@ -67,7 +67,7 @@ static CoreDataManager *sharedInstance = nil;
 	
 	[self saveChanges];	
 	
-	//NSLog(@"Filepath to file: %@", [newReflection filepath]);
+	//ImprovedLog(@"Filepath to file: %@", [newReflection filepath]);
 	
 }
 
@@ -92,7 +92,7 @@ static CoreDataManager *sharedInstance = nil;
 	
 	[self saveChanges];	
 	
-	NSLog(@"Reflection text: %@", [newReflection reflectionText]);
+	ImprovedLog(@"Reflection text: %@", [newReflection reflectionText]);
 	
 }
 
@@ -114,7 +114,7 @@ static CoreDataManager *sharedInstance = nil;
 	
 	[self saveChanges];	
 	
-	NSLog(@"Screen %@ accessed at %@", [newLog screenId], [newLog createdAt]);
+	ImprovedLog(@"Screen %@ accessed at %@", [newLog screenId], [newLog createdAt]);
 	
 	[[[SyncManager getSyncManagerInstance] bufferedReflections] addObject:newLog];
 	[[SyncManager getSyncManagerInstance] syncData];
@@ -127,7 +127,7 @@ static CoreDataManager *sharedInstance = nil;
 	
 	[self saveChanges];	
 	
-	NSLog(@"Screen %@ has name: %@", [newScreen screenId], [newScreen name]);
+	ImprovedLog(@"Screen %@ has name: %@", [newScreen screenId], [newScreen name]);
 	
 }
 
@@ -178,7 +178,7 @@ static CoreDataManager *sharedInstance = nil;
 	[formatter setTimeZone:destinationTimeZone];
 	
 	NSString* destinationString = [formatter stringFromDate:sourceDate];
-	NSLog(@"Converted: %@", destinationString);
+	ImprovedLog(@"Converted: %@", destinationString);
 	
 //	NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
 //	NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
@@ -283,7 +283,7 @@ static CoreDataManager *sharedInstance = nil;
 		NSString* screenName = [screenNames objectAtIndex:i];
 		
 		[self addScreen:screenId screenName:screenName];
-		NSLog(@"%@: %@", screenId, screenName);
+		ImprovedLog(@"%@: %@", screenId, screenName);
 	}
 	
 }
@@ -309,9 +309,9 @@ static CoreDataManager *sharedInstance = nil;
 	
 		[self saveChanges];	
 		
-		NSLog(@"Created new time");
-		NSLog(@"Morning date: %@", [newTime morningDate]);
-		NSLog(@"Evening date: %@", [newTime eveningDate]);
+		ImprovedLog(@"Created new time");
+		ImprovedLog(@"Morning date: %@", [newTime morningDate]);
+		ImprovedLog(@"Evening date: %@", [newTime eveningDate]);
 		
 	} else {
 		MorningEveningTime *oldTime = (MorningEveningTime*)[mutableFetchResults objectAtIndex:0];
@@ -320,9 +320,9 @@ static CoreDataManager *sharedInstance = nil;
 		
 		[self saveChanges];
 		
-		NSLog(@"Changed old time");
-		NSLog(@"Morning date: %@", [oldTime morningDate]);
-		NSLog(@"Evening date: %@", [oldTime eveningDate]);
+		ImprovedLog(@"Changed old time");
+		ImprovedLog(@"Morning date: %@", [oldTime morningDate]);
+		ImprovedLog(@"Evening date: %@", [oldTime eveningDate]);
 	}
 	
 	
@@ -378,7 +378,7 @@ static CoreDataManager *sharedInstance = nil;
 	
 	//Set last seen to today's date
 	[suggestion setLastSeen:[NSDate date]];
-	NSLog(@"Date: %@", [suggestion lastSeen]);
+	ImprovedLog(@"Date: %@", [suggestion lastSeen]);
 	[self saveChanges];	
 	
 	return suggestion;	
@@ -462,9 +462,9 @@ static CoreDataManager *sharedInstance = nil;
 		[suggestion setNextSeen:notificationDate];
 		[self saveChanges];
 		
-		NSLog(@"Theme: %@", [suggestion theme]);
-		NSLog(@"Next Seen: %@", [suggestion nextSeen]);
-		NSLog(@"Last Seen: %@", [suggestion lastSeen]);
+		ImprovedLog(@"Theme: %@", [suggestion theme]);
+		ImprovedLog(@"Next Seen: %@", [suggestion nextSeen]);
+		ImprovedLog(@"Last Seen: %@", [suggestion lastSeen]);
 		
 	}
 	
@@ -492,7 +492,7 @@ static CoreDataManager *sharedInstance = nil;
 		NSTimeInterval diff = [[suggestion nextSeen] timeIntervalSinceDate:morningDate];
 		
 		int days = (int) diff / (60*60*24);
-		NSLog(@"days since %@: %i", morningDate, days);
+		ImprovedLog(@"days since %@: %i", morningDate, days);
 		
 		[offset setDay:days];
 		//[offset setMinute:i];	
@@ -513,7 +513,7 @@ static CoreDataManager *sharedInstance = nil;
 		// Schedule ONLY for notifications happening in the future
 		// Notifications scheduled for the past fire immediately
 		if ([[localNotifMorning fireDate] timeIntervalSinceNow] > 0) {
-			NSLog(@"Scheduling %@", [suggestion theme]);
+			ImprovedLog(@"Scheduling %@", [suggestion theme]);
 			[[UIApplication sharedApplication] scheduleLocalNotification:localNotifMorning];
 		}
 		
@@ -661,10 +661,10 @@ static CoreDataManager *sharedInstance = nil;
 	//Save to Core Data
 	NSError *saveError;
 	if (![managedObjectContext save:&saveError]) {
-		NSLog(@"Saving changes failed: %@", saveError);
+		ImprovedLog(@"Saving changes failed: %@", saveError);
 	} else {
 		// The changes to suggestion have been persisted.
-		NSLog(@"Changes have been saved.");
+		ImprovedLog(@"Changes have been saved.");
 	}
 	
 	[NSError release];
@@ -684,10 +684,10 @@ static CoreDataManager *sharedInstance = nil;
 	
     for (NSManagedObject *managedObject in items) {
         [managedObjectContext deleteObject:managedObject];
-        NSLog(@"%@ object deleted",entityDescription);
+        ImprovedLog(@"%@ object deleted",entityDescription);
     }
     if (![managedObjectContext save:&error]) {
-        NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+        ImprovedLog(@"Error deleting %@ - error:%@",entityDescription,error);
     }
 	
 }

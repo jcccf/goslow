@@ -112,6 +112,8 @@
 
 #import "Reachability.h"
 
+#import "MLog.h"
+
 
 
 #define kShouldPrintReachabilityFlags 1
@@ -126,7 +128,7 @@ static void PrintReachabilityFlags(SCNetworkReachabilityFlags    flags, const ch
 	
     
 	
-    NSLog(@"Reachability Flag Status: %c%c %c%c%c%c%c%c%c %s\n",
+    ImprovedLog(@"Reachability Flag Status: %c%c %c%c%c%c%c%c%c %s\n",
 		  
 		  (flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',
 		  

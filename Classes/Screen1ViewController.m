@@ -116,7 +116,7 @@
 	
 	//Set current image to the suggestion selected
 	currentImage = [UIImage imageNamed:[suggestion picturePath]];
-	NSLog(@"Picture Path: %@", [suggestion picturePath]);
+	ImprovedLog(@"Picture Path: %@", [suggestion picturePath]);
 	//assert(newImage != nil);
 	imageViewPicture.image = currentImage;
 	//currentImage = newImage;
@@ -129,7 +129,7 @@
 	
 	//Set last seen to today's date
 	[suggestion setLastSeen:[NSDate date]];
-	NSLog(@"Date: %@", [suggestion lastSeen]);
+	ImprovedLog(@"Date: %@", [suggestion lastSeen]);
 	[[CoreDataManager getCoreDataManagerInstance] saveChanges];
 	
 }

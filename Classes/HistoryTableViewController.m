@@ -33,20 +33,20 @@
 	for(Reflection *r in reflectionsToDate){
 		if(![dates containsObject:[[[r createdAt] description] substringToIndex: 10]]){
 			[dates addObject:[[[r createdAt] description] substringToIndex: 10]];
-			NSLog(@"Added Reflection %@ to date array", [[r createdAt] description]);
+			ImprovedLog(@"Added Reflection %@ to date array", [[r createdAt] description]);
 		}
 		else{
-			NSLog(@"Duplicate Reflection");
+			ImprovedLog(@"Duplicate Reflection");
 		}
 	}
 	
-	NSLog(@"There are %i dates in dates", [dates count]);
+	ImprovedLog(@"There are %i dates in dates", [dates count]);
 	
 	[dates sortUsingSelector:@selector(compare:)];
 	
 	
 	for(NSString *s in dates){
-		NSLog(@"Date : %@", s);	
+		ImprovedLog(@"Date : %@", s);	
 		
 	}
 	
@@ -94,7 +94,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
 	[self populateArraysAndSortDates];
-	NSLog(@"Dates count when determining section number %i", [dates count]);
+	ImprovedLog(@"Dates count when determining section number %i", [dates count]);
     return [dates count];
 }
 
@@ -143,7 +143,7 @@
 						if(min >= 30){
 							min = 30;   
 						}
-						NSLog(@"Adding text %@ to Cell %i::%i", [t reflectionText], [indexPath section], [indexPath row]);
+						ImprovedLog(@"Adding text %@ to Cell %i::%i", [t reflectionText], [indexPath section], [indexPath row]);
 						cell.textLabel.text = [[t reflectionText] substringToIndex:min];
 						cell.backgroundView = nil;
 						cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -286,7 +286,7 @@
 			histRefViewCont.navigationItem.title = [NSString stringWithFormat:@"Photo for date %@",[[[p createdAt] description] substringToIndex:10]];
 			histRefViewCont.t.hidden = YES;
 			histRefViewCont.i.hidden = NO;
-			NSLog(@"%@", [p filepath]);
+			ImprovedLog(@"%@", [p filepath]);
 			histRefViewCont.im = [UIImage imageWithContentsOfFile:[p filepath]];
 			//UIImage *image = [UIImage imageWithContentsOfFile:[p filepath]];
 			//assert(image != nil);

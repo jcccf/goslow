@@ -138,7 +138,7 @@ static BOOL firstLoad = YES;
 					img = [UIImage imageNamed:@"DiaryFlowerStalkless.png" withColor:myColor];
 					uiv = [[UIImageView alloc] initWithImage:img];
 					scale = 1.0/log([colors count]/2.0);
-					NSLog(@"%f",  ((scrollView.frame.size.width-0.0) * scale) / 2);
+					ImprovedLog(@"%f",  ((scrollView.frame.size.width-0.0) * scale) / 2);
 					offset = arc4random() % (int) scrollView.frame.size.width - ((scrollView.frame.size.width-0.0) * scale) / 2;
 					voffset = arc4random() % (int) scrollView.frame.size.height - (scrollView.frame.size.height * scale)/2.0;
 				}
@@ -351,9 +351,9 @@ static BOOL firstLoad = YES;
     return cell;
 }
 
--(UITableViewCellAccessoryType)tableView:(UITableView*)tv accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath{
-		return UITableViewCellAccessoryDisclosureIndicator;
-}
+//-(UITableViewCellAccessoryType)tableView:(UITableView*)tv accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath{
+//		return UITableViewCellAccessoryDisclosureIndicator;
+//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	
@@ -446,7 +446,7 @@ static BOOL firstLoad = YES;
 		histRefViewCont.navigationItem.title = [NSString stringWithFormat:@"Photo for date %@",[[[p createdAt] description] substringToIndex:10]];
 		histRefViewCont.t.hidden = YES;
 		histRefViewCont.i.hidden = NO;
-		NSLog(@"%@", [p filepath]);
+		ImprovedLog(@"%@", [p filepath]);
 		histRefViewCont.im = [UIImage imageWithContentsOfFile:[p filepath]];
 		//UIImage *image = [UIImage imageWithContentsOfFile:[p filepath]];
 		//assert(image != nil);
