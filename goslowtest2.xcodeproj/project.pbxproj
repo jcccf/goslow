@@ -57,6 +57,7 @@
 		10BFF65C128DAC7D00B58E2C /* LogScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFF659128DAC7D00B58E2C /* LogScreen.m */; };
 		10BFF65D128DAC7D00B58E2C /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFF65B128DAC7D00B58E2C /* Screen.m */; };
 		10BFF661128DACF300B58E2C /* 19-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 10BFF660128DACF300B58E2C /* 19-gear.png */; };
+		10D0CDE813E79B450005D5F5 /* suggestions in Resources */ = {isa = PBXBuildFile; fileRef = 10D0CDE713E79B450005D5F5 /* suggestions */; };
 		1D3623260D0F684500981E51 /* goslowtest2AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* goslowtest2AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -78,27 +79,6 @@
 		DF24EB74129BA2E500E82F53 /* ScrollDiaryScreenController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF24EB72129BA2E500E82F53 /* ScrollDiaryScreenController.xib */; };
 		DF24EB78129BA2FF00E82F53 /* ScrollViewPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24EB76129BA2FF00E82F53 /* ScrollViewPageController.m */; };
 		DF24EB79129BA2FF00E82F53 /* ScrollViewPageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF24EB77129BA2FF00E82F53 /* ScrollViewPageController.xib */; };
-		DF74D5F71278D98D00E92851 /* breathe.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E21278D98D00E92851 /* breathe.jpg */; };
-		DF74D5F81278D98D00E92851 /* choose_consciously.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E31278D98D00E92851 /* choose_consciously.jpg */; };
-		DF74D5F91278D98D00E92851 /* connect_with_nature.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E41278D98D00E92851 /* connect_with_nature.jpg */; };
-		DF74D5FA1278D98D00E92851 /* connect_with_others.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E51278D98D00E92851 /* connect_with_others.jpg */; };
-		DF74D5FB1278D98D00E92851 /* control_worry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E61278D98D00E92851 /* control_worry.jpg */; };
-		DF74D5FC1278D98D00E92851 /* eat_well.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E71278D98D00E92851 /* eat_well.jpg */; };
-		DF74D5FD1278D98D00E92851 /* exercise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E81278D98D00E92851 /* exercise.jpg */; };
-		DF74D5FE1278D98D00E92851 /* express_gratitude.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5E91278D98D00E92851 /* express_gratitude.jpg */; };
-		DF74D5FF1278D98D00E92851 /* get_more_sleep.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5EA1278D98D00E92851 /* get_more_sleep.jpg */; };
-		DF74D6001278D98D00E92851 /* grow_from_mistakes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5EB1278D98D00E92851 /* grow_from_mistakes.jpg */; };
-		DF74D6011278D98D00E92851 /* laugh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5EC1278D98D00E92851 /* laugh.jpg */; };
-		DF74D6021278D98D00E92851 /* listen_to_music.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5ED1278D98D00E92851 /* listen_to_music.jpg */; };
-		DF74D6031278D98D00E92851 /* meditate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5EE1278D98D00E92851 /* meditate.jpg */; };
-		DF74D6041278D98D00E92851 /* play.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5EF1278D98D00E92851 /* play.jpg */; };
-		DF74D6051278D98D00E92851 /* power_nap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F01278D98D00E92851 /* power_nap.jpg */; };
-		DF74D6061278D98D00E92851 /* reflect.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F11278D98D00E92851 /* reflect.jpg */; };
-		DF74D6071278D98D00E92851 /* relax_your_body.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F21278D98D00E92851 /* relax_your_body.jpg */; };
-		DF74D6081278D98D00E92851 /* think_positively.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F31278D98D00E92851 /* think_positively.jpg */; };
-		DF74D6091278D98D00E92851 /* thoughts_matter.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F41278D98D00E92851 /* thoughts_matter.jpg */; };
-		DF74D60A1278D98D00E92851 /* use_resources.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F51278D98D00E92851 /* use_resources.jpg */; };
-		DF74D60B1278D98D00E92851 /* visualize.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DF74D5F61278D98D00E92851 /* visualize.jpg */; };
 		DF74D60D1278D9B900E92851 /* colorWheel1.png in Resources */ = {isa = PBXBuildFile; fileRef = DF74D60C1278D9B900E92851 /* colorWheel1.png */; };
 		DF74D6201278DA1600E92851 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF74D61F1278DA1600E92851 /* QuartzCore.framework */; };
 		DF74D6331278DA7C00E92851 /* ColorPickerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF74D62C1278DA7C00E92851 /* ColorPickerImageView.m */; };
@@ -189,6 +169,7 @@
 		10BFF65A128DAC7D00B58E2C /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Screen.h; path = Classes/Screen.h; sourceTree = "<group>"; };
 		10BFF65B128DAC7D00B58E2C /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Screen.m; path = Classes/Screen.m; sourceTree = "<group>"; };
 		10BFF660128DACF300B58E2C /* 19-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "19-gear.png"; sourceTree = "<group>"; };
+		10D0CDE713E79B450005D5F5 /* suggestions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = suggestions; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* goslowtest2AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goslowtest2AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* goslowtest2AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goslowtest2AppDelegate.m; sourceTree = "<group>"; };
@@ -220,27 +201,6 @@
 		DF24EB75129BA2FF00E82F53 /* ScrollViewPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewPageController.h; sourceTree = "<group>"; };
 		DF24EB76129BA2FF00E82F53 /* ScrollViewPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewPageController.m; sourceTree = "<group>"; };
 		DF24EB77129BA2FF00E82F53 /* ScrollViewPageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewPageController.xib; sourceTree = "<group>"; };
-		DF74D5E21278D98D00E92851 /* breathe.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = breathe.jpg; sourceTree = "<group>"; };
-		DF74D5E31278D98D00E92851 /* choose_consciously.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = choose_consciously.jpg; sourceTree = "<group>"; };
-		DF74D5E41278D98D00E92851 /* connect_with_nature.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = connect_with_nature.jpg; sourceTree = "<group>"; };
-		DF74D5E51278D98D00E92851 /* connect_with_others.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = connect_with_others.jpg; sourceTree = "<group>"; };
-		DF74D5E61278D98D00E92851 /* control_worry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = control_worry.jpg; sourceTree = "<group>"; };
-		DF74D5E71278D98D00E92851 /* eat_well.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = eat_well.jpg; sourceTree = "<group>"; };
-		DF74D5E81278D98D00E92851 /* exercise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = exercise.jpg; sourceTree = "<group>"; };
-		DF74D5E91278D98D00E92851 /* express_gratitude.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = express_gratitude.jpg; sourceTree = "<group>"; };
-		DF74D5EA1278D98D00E92851 /* get_more_sleep.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = get_more_sleep.jpg; sourceTree = "<group>"; };
-		DF74D5EB1278D98D00E92851 /* grow_from_mistakes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grow_from_mistakes.jpg; sourceTree = "<group>"; };
-		DF74D5EC1278D98D00E92851 /* laugh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = laugh.jpg; sourceTree = "<group>"; };
-		DF74D5ED1278D98D00E92851 /* listen_to_music.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = listen_to_music.jpg; sourceTree = "<group>"; };
-		DF74D5EE1278D98D00E92851 /* meditate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meditate.jpg; sourceTree = "<group>"; };
-		DF74D5EF1278D98D00E92851 /* play.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = play.jpg; sourceTree = "<group>"; };
-		DF74D5F01278D98D00E92851 /* power_nap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = power_nap.jpg; sourceTree = "<group>"; };
-		DF74D5F11278D98D00E92851 /* reflect.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = reflect.jpg; sourceTree = "<group>"; };
-		DF74D5F21278D98D00E92851 /* relax_your_body.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = relax_your_body.jpg; sourceTree = "<group>"; };
-		DF74D5F31278D98D00E92851 /* think_positively.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = think_positively.jpg; sourceTree = "<group>"; };
-		DF74D5F41278D98D00E92851 /* thoughts_matter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thoughts_matter.jpg; sourceTree = "<group>"; };
-		DF74D5F51278D98D00E92851 /* use_resources.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = use_resources.jpg; sourceTree = "<group>"; };
-		DF74D5F61278D98D00E92851 /* visualize.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = visualize.jpg; sourceTree = "<group>"; };
 		DF74D60C1278D9B900E92851 /* colorWheel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorWheel1.png; sourceTree = "<group>"; };
 		DF74D61F1278DA1600E92851 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DF74D62B1278DA7B00E92851 /* ColorPickerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerImageView.h; sourceTree = "<group>"; };
@@ -397,6 +357,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				10D0CDE713E79B450005D5F5 /* suggestions */,
 				1075DDA112A5B24600D61419 /* DiaryFlowerStalkless.png */,
 				1008BF99127902C100742796 /* 09-chat-2.png */,
 				1008BF9B127902F000742796 /* 11-clock.png */,
@@ -409,46 +370,25 @@
 				1050BEAD127B8407001C5640 /* 96-book.png */,
 				107493DC129C7B4C00D35C2E /* ArrowLeft.png */,
 				107493DD129C7B4C00D35C2E /* ArrowRight.png */,
-				DF74D5E21278D98D00E92851 /* breathe.jpg */,
 				0A3601101263874D0093D5B2 /* breathe.png */,
 				1082E6211278DC3100A7701A /* CameraReflect.png */,
-				DF74D5E31278D98D00E92851 /* choose_consciously.jpg */,
 				1082E6221278DC3100A7701A /* ColorReflect.png */,
 				DF74D60C1278D9B900E92851 /* colorWheel1.png */,
-				DF74D5E41278D98D00E92851 /* connect_with_nature.jpg */,
-				DF74D5E51278D98D00E92851 /* connect_with_others.jpg */,
-				DF74D5E61278D98D00E92851 /* control_worry.jpg */,
 				0A022827129C856100E1A28B /* DiaryFlower.png */,
-				DF74D5E71278D98D00E92851 /* eat_well.jpg */,
 				107493E2129C7B5500D35C2E /* Empty_Diary.png */,
-				DF74D5E81278D98D00E92851 /* exercise.jpg */,
-				DF74D5E91278D98D00E92851 /* express_gratitude.jpg */,
-				DF74D5EA1278D98D00E92851 /* get_more_sleep.jpg */,
 				8D1107310486CEB800E47090 /* goslowtest2-Info.plist */,
 				2819305F112F816700ECF9B4 /* goslowtest2.xcdatamodeld */,
-				DF74D5EB1278D98D00E92851 /* grow_from_mistakes.jpg */,
 				8C85BA42127A754F0060A355 /* icon.jpg */,
 				1050BEB7127BA330001C5640 /* icon_color_wheel.png */,
 				1050BEB8127BA330001C5640 /* icon_digital_camera.png */,
 				1050BEBF127BA4D9001C5640 /* icon_digital_camera2.png */,
 				1050BEB9127BA330001C5640 /* icon_document_pen.png */,
-				DF74D5EC1278D98D00E92851 /* laugh.jpg */,
-				DF74D5ED1278D98D00E92851 /* listen_to_music.jpg */,
 				10BFF658128DAC7D00B58E2C /* LogScreen.h */,
 				10BFF659128DAC7D00B58E2C /* LogScreen.m */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				DF74D5EE1278D98D00E92851 /* meditate.jpg */,
-				DF74D5EF1278D98D00E92851 /* play.jpg */,
-				DF74D5F01278D98D00E92851 /* power_nap.jpg */,
-				DF74D5F11278D98D00E92851 /* reflect.jpg */,
-				DF74D5F21278D98D00E92851 /* relax_your_body.jpg */,
 				10BFF65A128DAC7D00B58E2C /* Screen.h */,
 				10BFF65B128DAC7D00B58E2C /* Screen.m */,
 				1082E6231278DC3100A7701A /* TextReflect.png */,
-				DF74D5F31278D98D00E92851 /* think_positively.jpg */,
-				DF74D5F41278D98D00E92851 /* thoughts_matter.jpg */,
-				DF74D5F51278D98D00E92851 /* use_resources.jpg */,
-				DF74D5F61278D98D00E92851 /* visualize.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -472,6 +412,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "goslowtest2" */;
 			buildPhases = (
+				10D0CDE913E79B630005D5F5 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -527,27 +468,6 @@
 				0A5EA3791277F79500B6B9A8 /* ReflectCameraViewController.xib in Resources */,
 				0A5EA37C1277F79500B6B9A8 /* ReflectColorViewController.xib in Resources */,
 				0A5EA37F1277F79500B6B9A8 /* ReflectTextViewController.xib in Resources */,
-				DF74D5F71278D98D00E92851 /* breathe.jpg in Resources */,
-				DF74D5F81278D98D00E92851 /* choose_consciously.jpg in Resources */,
-				DF74D5F91278D98D00E92851 /* connect_with_nature.jpg in Resources */,
-				DF74D5FA1278D98D00E92851 /* connect_with_others.jpg in Resources */,
-				DF74D5FB1278D98D00E92851 /* control_worry.jpg in Resources */,
-				DF74D5FC1278D98D00E92851 /* eat_well.jpg in Resources */,
-				DF74D5FD1278D98D00E92851 /* exercise.jpg in Resources */,
-				DF74D5FE1278D98D00E92851 /* express_gratitude.jpg in Resources */,
-				DF74D5FF1278D98D00E92851 /* get_more_sleep.jpg in Resources */,
-				DF74D6001278D98D00E92851 /* grow_from_mistakes.jpg in Resources */,
-				DF74D6011278D98D00E92851 /* laugh.jpg in Resources */,
-				DF74D6021278D98D00E92851 /* listen_to_music.jpg in Resources */,
-				DF74D6031278D98D00E92851 /* meditate.jpg in Resources */,
-				DF74D6041278D98D00E92851 /* play.jpg in Resources */,
-				DF74D6051278D98D00E92851 /* power_nap.jpg in Resources */,
-				DF74D6061278D98D00E92851 /* reflect.jpg in Resources */,
-				DF74D6071278D98D00E92851 /* relax_your_body.jpg in Resources */,
-				DF74D6081278D98D00E92851 /* think_positively.jpg in Resources */,
-				DF74D6091278D98D00E92851 /* thoughts_matter.jpg in Resources */,
-				DF74D60A1278D98D00E92851 /* use_resources.jpg in Resources */,
-				DF74D60B1278D98D00E92851 /* visualize.jpg in Resources */,
 				DF74D60D1278D9B900E92851 /* colorWheel1.png in Resources */,
 				DF74D6351278DA7C00E92851 /* ReflectTableViewController.xib in Resources */,
 				1082E6241278DC3100A7701A /* CameraReflect.png in Resources */,
@@ -579,10 +499,27 @@
 				B952BB5E12A1F9EB001A8754 /* AckView.xib in Resources */,
 				1075DDA212A5B24600D61419 /* DiaryFlowerStalkless.png in Resources */,
 				10A56BE812A7296500DEA1B0 /* CameraSaveController.xib in Resources */,
+				10D0CDE813E79B450005D5F5 /* suggestions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10D0CDE913E79B630005D5F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "touch -cm ${SRCROOT}/suggestions/";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {

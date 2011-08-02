@@ -115,7 +115,7 @@
 	
 	
 	//Set current image to the suggestion selected
-	currentImage = [UIImage imageNamed:[suggestion picturePath]];
+	currentImage = [UIImage imageNamed: [NSString stringWithFormat:@"suggestions/%@",[suggestion picturePath]]];
 	ImprovedLog(@"Picture Path: %@", [suggestion picturePath]);
 	//assert(newImage != nil);
 	imageViewPicture.image = currentImage;
