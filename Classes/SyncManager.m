@@ -92,7 +92,7 @@ static SyncManager *sharedInstance = nil;
 	[post_dict release];
 	
 	// Establish the API request. Use upload vs uploadAndPost for skip tweet
-    NSString *baseurl = @"http://wl58-rails.cac.cornell.edu/app/text_reflections"; 
+    NSString *baseurl = @"http://rails.goslow.cis.cornell.edu/text_reflections"; 
     NSURL *url = [NSURL URLWithString:baseurl];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (!urlRequest) NOTIFY_AND_LEAVE(@"Error creating the URL Request");
@@ -117,7 +117,7 @@ static SyncManager *sharedInstance = nil;
 	[post_dict release];
 	
 	// Establish the API request. Use upload vs uploadAndPost for skip tweet
-    NSString *baseurl = @"http://wl58-rails.cac.cornell.edu/app/photo_reflections"; 
+    NSString *baseurl = @"http://rails.goslow.cis.cornell.edu/photo_reflections"; 
     NSURL *url = [NSURL URLWithString:baseurl];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (!urlRequest) NOTIFY_AND_LEAVE(@"Error creating the URL Request");
@@ -143,7 +143,7 @@ static SyncManager *sharedInstance = nil;
 	[post_dict release];
 	
 	// Establish the API request. Use upload vs uploadAndPost for skip tweet
-    NSString *baseurl = @"http://wl58-rails.cac.cornell.edu/app/color_reflections"; 
+    NSString *baseurl = @"http://rails.goslow.cis.cornell.edu/color_reflections"; 
     NSURL *url = [NSURL URLWithString:baseurl];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (!urlRequest) NOTIFY_AND_LEAVE(@"Error creating the URL Request");
@@ -162,14 +162,15 @@ static SyncManager *sharedInstance = nil;
 	//assert([timestamp length] == 19); //Timestamps must be in yyyy-mm-dd hh:mm:ss format
 	ImprovedLog(@"Buffering Daily Suggestion");
 	NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
-    [post_dict setObject:theme forKey:@"daily_suggestion[theme]"];
+    [post_dict setObject:[theme stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]] forKey:@"daily_suggestion[theme]"];
 	[post_dict setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"daily_suggestion[udid]"];
 	[post_dict setObject:timestamp forKey:@"daily_suggestion[time_entered]"];
 	NSData *postData = [self generateFormDataFromPostDictionary:post_dict];
+    ImprovedLog(@"%@", post_dict);
 	[post_dict release];
 	
 	// Establish the API request. Use upload vs uploadAndPost for skip tweet
-    NSString *baseurl = @"http://wl58-rails.cac.cornell.edu/app/daily_suggestions"; 
+    NSString *baseurl = @"http://rails.goslow.cis.cornell.edu/daily_suggestions"; 
     NSURL *url = [NSURL URLWithString:baseurl];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (!urlRequest) NOTIFY_AND_LEAVE(@"Error creating the URL Request");
@@ -195,7 +196,7 @@ static SyncManager *sharedInstance = nil;
 	[post_dict release];
 	
 	// Establish the API request. Use upload vs uploadAndPost for skip tweet
-    NSString *baseurl = @"http://wl58-rails.cac.cornell.edu/app/log_screens"; 
+    NSString *baseurl = @"http://rails.goslow.cis.cornell.edu/log_screens"; 
     NSURL *url = [NSURL URLWithString:baseurl];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if (!urlRequest) NOTIFY_AND_LEAVE(@"Error creating the URL Request");
@@ -211,115 +212,118 @@ static SyncManager *sharedInstance = nil;
 }
 
 -(void)syncData{
-//	wifiReach = [[Reachability reachabilityForLocalWiFi] retain];
-//	[wifiReach startNotifier];
-//	
-//	NetworkStatus netStatus = [wifiReach currentReachabilityStatus];
-//	
-//	// Pull any unsynchronized data from NSUserDefaults
-//	NSMutableArray *ar = [[SyncManager getSyncManagerInstance] bufferedReflections];
-//	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//	NSData *objectsData = [userDefaults objectForKey:@"savedArray"];
-//	// if ([objectsData length] > 0) {
-//	NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData];
-//	// }
-//	if(objects != nil && netStatus == ReachableViaWiFi){
-//		[ar removeObjectsInArray:objects];
-//		[ar addObjectsFromArray:objects];
-//	}
-//	ImprovedLog(@"Loaded Buffered Data");
-//	
-//	// TODO Ensure that buffered stuff is preserved even when you exit the application
-//	
-//	// TODO Sync Suggestion of the Day
-//	
-//	NSMutableArray *objectsToDelete = [[NSMutableArray alloc] init];
-//	
-//	if(netStatus == ReachableViaWiFi){
-//		ImprovedLog(@"Wifi connection is turned on!!");
-//		
-//		// Sync any failed URLRequests
-//		ImprovedLog(@"Trying to sync any failed URLRequests...");
-//		[[self urLock] lock];
-//		NSMutableArray* aru = [[NSMutableArray alloc] init];
-//		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//		NSData *objectsData = [userDefaults objectForKey:@"savedUrlRequests"];
-//		NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData];
-//		if(objects != nil){
-//			[aru addObjectsFromArray:objects];
-//		}
-//		for(NSObject *o in aru){
-//			NSMutableURLRequest* urq = (NSMutableURLRequest*) o;
-//			[[NSURLConnection alloc] initWithRequest:urq delegate:[[SyncManagerConnectionDelegate alloc] set:urq withLock:[self urLock] withType:@"Retry"]];
-//		}
-//		[aru release];
-//		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]] forKey:@"savedUrlRequests"];
-//		[[NSUserDefaults standardUserDefaults] synchronize];
-//		[[self urLock] unlock];
-//		ImprovedLog(@"...finished initiating retries for failed URLRequests");
-//		
-//		// Sync other normal stuff
-//		ImprovedLog(@"Syncing Data");
-//		for(NSObject* o in ar){
-//			ImprovedLog(@"Syncing object...");
-//			ImprovedLog([NSString stringWithFormat:@"Size of buffer array sending objects to server %i",[ar count]]);
-//			if([o isKindOfClass:[NSString class]]){
-//				NSString *s = (NSString*)o;
-//				[self sendTextReflection:s];
-//				[objectsToDelete addObject:o];
-//			}
-//			else if([o isKindOfClass:[ColorReflection class]]){
-//				ColorReflection* cr = (ColorReflection*) o;
-//				NSNumber* r = [cr colorRed];
-//				NSNumber* g = [cr colorGreen];
-//				NSNumber* b = [cr colorBlue];
-//				ImprovedLog(@"%f %f %f", [r floatValue], [g floatValue], [b floatValue]);
-//				[self sendColorReflectionWithRed:r andGreen:g andBlue:b];
-//				[objectsToDelete addObject:o];
-//			}
-//			else if([o isKindOfClass:[NSArray class]]){
-//				// TODO Use this for daily suggestions instead
-//				NSArray *d = (NSArray*)o;
-//				NSString* suggestionTheme = (NSString*) [d objectAtIndex:0];
-//				NSDate* time = [d objectAtIndex:1];
-//				NSString* s = [time descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S %z" timeZone:nil locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-//				ImprovedLog(@"%@", suggestionTheme);
-//				[self sendDailySuggestion:suggestionTheme andTime:s];
-//				[objectsToDelete addObject:o];
-//			}
-//			else if([o isKindOfClass:[UIImage class]]){
-//				UIImage *i = (UIImage*)o;
-//				[self sendPhotoReflection:i];
-//				[objectsToDelete addObject:o];
-//			}
-//			else if([o isKindOfClass:[LogScreen class]]){
-//				LogScreen* ls = (LogScreen*) o;
-//				int screenId = [[ls screenId] intValue];
-//				NSDate* time = [ls createdAt];
-//				NSString* s = [time descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S %z" timeZone:nil locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-//				[self sendLogScreen:screenId andTime:s];
-//				[objectsToDelete addObject:o];
-//			}
-//		}
-//		[ar removeObjectsInArray:objectsToDelete];
-//		[objectsToDelete release];
-//		[[self urLock] lock];
-//		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
-//		[[NSUserDefaults standardUserDefaults] synchronize];
-//		[[self urLock] unlock];
-//		ImprovedLog(@"Saved Buffered Data");
-//	}
-//	else {
-//		ImprovedLog(@"NO WIFI CONNECTION!!");
-//	}
-//	
-//	ImprovedLog(@"out of wifi if-then");
-//	// Save to NSUserDefaults
-//	[[self urLock] lock];
-//	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
-//	[[NSUserDefaults standardUserDefaults] synchronize];
-//	[[self urLock] unlock];
-//	ImprovedLog(@"Saved Buffered Data");
+	wifiReach = [[Reachability reachabilityForLocalWiFi] retain];
+	[wifiReach startNotifier];
+	
+	NetworkStatus netStatus = [wifiReach currentReachabilityStatus];
+	
+	// Pull any unsynchronized data from NSUserDefaults
+	NSMutableArray *ar = [[SyncManager getSyncManagerInstance] bufferedReflections];
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	NSData *objectsData = [userDefaults objectForKey:@"savedArray"];
+	// if ([objectsData length] > 0) {
+	NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData];
+	// }
+	if(objects != nil && netStatus == ReachableViaWiFi){
+		[ar removeObjectsInArray:objects];
+		[ar addObjectsFromArray:objects];
+	}
+	ImprovedLog(@"Loaded Buffered Data");
+	
+	// TODO Ensure that buffered stuff is preserved even when you exit the application
+	
+	// TODO Sync Suggestion of the Day
+	
+	NSMutableArray *objectsToDelete = [[NSMutableArray alloc] init];
+	
+	if(netStatus == ReachableViaWiFi){
+		ImprovedLog(@"Wifi connection is turned on!!");
+		
+		// Sync any failed URLRequests
+		ImprovedLog(@"Trying to sync any failed URLRequests...");
+		[[self urLock] lock];
+		NSMutableArray* aru = [[NSMutableArray alloc] init];
+		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+		NSData *objectsData = [userDefaults objectForKey:@"savedUrlRequests"];
+		NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData];
+		if(objects != nil){
+			[aru addObjectsFromArray:objects];
+		}
+		for(NSObject *o in aru){
+			NSMutableURLRequest* urq = (NSMutableURLRequest*) o;
+			[[NSURLConnection alloc] initWithRequest:urq delegate:[[SyncManagerConnectionDelegate alloc] set:urq withLock:[self urLock] withType:@"Retry"]];
+		}
+		[aru release];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]] forKey:@"savedUrlRequests"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		[[self urLock] unlock];
+		ImprovedLog(@"...finished initiating retries for failed URLRequests");
+		
+		// Sync other normal stuff
+		ImprovedLog(@"Syncing Data");
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"y-M-d H:m:s z"];
+		for(NSObject* o in ar){
+			ImprovedLog(@"Syncing object...");
+			ImprovedLog(@"Size of buffer array sending objects to server %i", [ar count]);
+			if([o isKindOfClass:[NSString class]]){
+				NSString *s = (NSString*)o;
+				[self sendTextReflection:s];
+				[objectsToDelete addObject:o];
+			}
+			else if([o isKindOfClass:[ColorReflection class]]){
+				ColorReflection* cr = (ColorReflection*) o;
+				NSNumber* r = [cr colorRed];
+				NSNumber* g = [cr colorGreen];
+				NSNumber* b = [cr colorBlue];
+				ImprovedLog(@"%f %f %f", [r floatValue], [g floatValue], [b floatValue]);
+				[self sendColorReflectionWithRed:r andGreen:g andBlue:b];
+				[objectsToDelete addObject:o];
+			}
+			else if([o isKindOfClass:[NSArray class]]){
+				// TODO Use this for daily suggestions instead
+				NSArray *d = (NSArray*)o;
+				NSString* suggestionTheme = (NSString*) [d objectAtIndex:0];
+				NSDate* time = [d objectAtIndex:1];
+
+				NSString* s = [dateFormatter stringFromDate:time];
+				ImprovedLog(@"Suggestion Theme Is: %@", suggestionTheme);
+				[self sendDailySuggestion:suggestionTheme andTime:s];
+				[objectsToDelete addObject:o];
+			}
+			else if([o isKindOfClass:[UIImage class]]){
+				UIImage *i = (UIImage*)o;
+				[self sendPhotoReflection:i];
+				[objectsToDelete addObject:o];
+			}
+			else if([o isKindOfClass:[LogScreen class]]){
+				LogScreen* ls = (LogScreen*) o;
+				int screenId = [[ls screenId] intValue];
+				NSDate* time = [ls createdAt];
+				NSString* s = [dateFormatter stringFromDate:time];
+				[self sendLogScreen:screenId andTime:s];
+				[objectsToDelete addObject:o];
+			}
+		}
+		[ar removeObjectsInArray:objectsToDelete];
+		[objectsToDelete release];
+		[[self urLock] lock];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		[[self urLock] unlock];
+		ImprovedLog(@"Saved Buffered Data");
+	}
+	else {
+		ImprovedLog(@"NO WIFI CONNECTION!!");
+	}
+	
+	ImprovedLog(@"out of wifi if-then");
+	// Save to NSUserDefaults
+	[[self urLock] lock];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:ar] forKey:@"savedArray"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	[[self urLock] unlock];
+	ImprovedLog(@"Saved Buffered Data");
 	
 }
 
