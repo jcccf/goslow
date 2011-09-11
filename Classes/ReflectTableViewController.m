@@ -193,6 +193,7 @@
 
 -(void) goToCamera
 {
+    ImprovedLog(@"Going to Camera...");
 	if(reflectCameraViewController == nil){
 		reflectCameraViewController = [[UIImagePickerController alloc] init];
 		if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -211,62 +212,88 @@
 }
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	// HACK to prevent multiple calls of didFinishPickingMediaWithInfo
-	if (hackTime == 0.0) {
-		hackTime = CFAbsoluteTimeGetCurrent();
-	}
-	if (CFAbsoluteTimeGetCurrent() - hackTime < 1.0) {
-		//Do nothing
-	}
-	else {
-		hackTime = CFAbsoluteTimeGetCurrent();
+    
+    
+//    // Make a Spinner ? Maybe not.
+//    UIActivityIndicatorView* spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    [spinner setCenter:CGPointMake(screenRect.size.width/2.0, screenRect.size.height/2.0)]; // I do this because I'm in landscape mode
+//    [self.view addSubview:spinner]; // spinner is not visible until started
+//    [spinner startAnimating];
+//    [spinner stopAnimating];
+//    [spinner removeFromSuperview];
+//    [spinner release];
+    
+//	// HACK to prevent multiple calls of didFinishPickingMediaWithInfo
+//	if (hackTime == 0.0) {
+//		hackTime = CFAbsoluteTimeGetCurrent();
+//	}
+//	if (CFAbsoluteTimeGetCurrent() - hackTime < 1.0) {
+//		//Do nothing
+//	}
+//	else {
+//		hackTime = CFAbsoluteTimeGetCurrent();
+//  ...
+//    [picker release];
+//	}
 		
-		ImprovedLog(@"Did Finish Picking!");
-		
-		// Access the uncropped image from info dictionary
-		UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-		
-		//save image to syncdatamanager
-		
-		[[[SyncManager getSyncManagerInstance] bufferedReflections] addObject:image];
-		[[SyncManager getSyncManagerInstance] syncData];
-		
-		//Save image to disk
-		
-		NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.25f)];
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		
-		NSString *imagePath = [paths objectAtIndex:0];
-		NSString *fullPath = [NSString stringWithFormat:@"%@/%@.jpg",imagePath,[[NSDate date] description]];
-		
-		
-		BOOL f = [imageData writeToFile:fullPath atomically:YES];
-		
-		if(!f)
-			ImprovedLog(@"Image save fail");
-		else {
-			ImprovedLog(@"Image saved!");
-		}
-		
-		[[CoreDataManager getCoreDataManagerInstance] addLog:[NSNumber numberWithInt:10]];
-		[[CoreDataManager getCoreDataManagerInstance] addPhotoReflection:fullPath];
-		
-		
-		//Save image to camera roll if selected
-		
-		[[NSUserDefaults standardUserDefaults] synchronize];
-		BOOL userSelection = [[NSUserDefaults standardUserDefaults] boolForKey:@"CameraRollSave"];
-		if(userSelection){
-			UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-		}
-		
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save!" message:@"Your photo reflection was saved!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-		[[self navigationController] dismissModalViewControllerAnimated:YES];
-		//[picker release];
-	}
+    ImprovedLog(@"Did Finish Picking!");
+    [[self navigationController] dismissModalViewControllerAnimated:YES];
+    
+    // Access the uncropped image from info dictionary
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    [self.navigationController dismissModalViewControllerAnimated:YES];   
+    
+    // Make a new thread to handle resizing and saving
+    [NSThread detachNewThreadSelector:@selector(uploadImage:) toTarget:self withObject:image]; 
+        
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save!" message:@"Your photo reflection was saved!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+
 }
+
+- (void)uploadImage:(UIImage *)image {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //save image to syncdatamanager
+    
+    [[[SyncManager getSyncManagerInstance] bufferedReflections] addObject:image];
+    [[SyncManager getSyncManagerInstance] syncData];
+    
+    //Save image to disk
+    
+    NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.25f)];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *imagePath = [paths objectAtIndex:0];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@.jpg",imagePath,[[NSDate date] description]];
+    
+    
+    BOOL f = [imageData writeToFile:fullPath atomically:YES];
+    
+    if(!f)
+        ImprovedLog(@"Image save fail");
+    else {
+        ImprovedLog(@"Image saved!");
+    }
+    
+    [[CoreDataManager getCoreDataManagerInstance] addLog:[NSNumber numberWithInt:10]];
+    [[CoreDataManager getCoreDataManagerInstance] addPhotoReflection:fullPath];
+    
+    
+    //Save image to camera roll if selected
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    BOOL userSelection = [[NSUserDefaults standardUserDefaults] boolForKey:@"CameraRollSave"];
+    if(userSelection){
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
+
+    [pool release];
+}
+
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
 	UIAlertView *alert;
