@@ -237,17 +237,26 @@
 //    [picker release];
 //	}
 		
-    ImprovedLog(@"Did Finish Picking!");
+    ImprovedLog(@"Did Finish Picking1!");
     [[self navigationController] dismissModalViewControllerAnimated:YES];
+    
+    ImprovedLog(@"Did Finish Picking2!");
     
     // Access the uncropped image from info dictionary
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
-    [self.navigationController dismissModalViewControllerAnimated:YES];   
+    ImprovedLog(@"Did Finish Picking3!");
+    
+    [self.navigationController dismissModalViewControllerAnimated:YES];
+    
+    ImprovedLog(@"Did Finish Picking4!");
     
     // Make a new thread to handle resizing and saving
+    [image retain];
     [NSThread detachNewThreadSelector:@selector(uploadImage:) toTarget:self withObject:image]; 
         
+    ImprovedLog(@"Did Finish Picking5!");
+    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save!" message:@"Your photo reflection was saved!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alert show];
     [alert release];
@@ -289,6 +298,8 @@
     if(userSelection){
         UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     }
+    
+    
 
     [pool release];
 }

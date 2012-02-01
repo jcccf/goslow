@@ -13,6 +13,7 @@
 @implementation SyncManagerConnectionDelegate
 
 -(SyncManagerConnectionDelegate*) set:(NSMutableURLRequest*) ur withLock:(NSLock*) l withType:(NSString*) st{
+    ImprovedLog(@"Creating Connection Delegate for %@", st);
 	self = [super init];
 	if (self) {
 		urlRequest = ur;
